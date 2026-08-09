@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Added manually: .dlt/secrets.toml holds a live Stripe test secret key and
+# was found untracked-but-not-ignored mid-project (one `git add -A` away from
+# being committed). *.duckdb is the generated local database file - disposable
+# output, not source, and can contain data that shouldn't be committed either.
+.dlt/secrets.toml
+*.duckdb

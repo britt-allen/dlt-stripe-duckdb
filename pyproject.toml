@@ -1,0 +1,20 @@
+[project]
+name = "dlt-stripe-duckdb"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "britt", email = "47340362+traintestbritt@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "dlt[duckdb]>=1.29.1",
+    "stripe>=5.0.0,<16",
+]
+
+[project.scripts]
+dlt-stripe-duckdb = "dlt_stripe_duckdb:main"
+
+[build-system]
+requires = ["uv_build>=0.12.2,<0.13.0"]
+build-backend = "uv_build"
