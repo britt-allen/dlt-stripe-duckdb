@@ -6,9 +6,9 @@ Loads fake `Customer` and `Charge` data from Stripe into DuckDB, using dlt's `st
 
 ## Prerequisites (Linux and macOS)
 
-- Run the following command to install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-- Run the following command to install the DuckDB CLI: `curl https://install.duckdb.org | sh`
-- A Stripe account with a test-mode secret key (`sk_test_...`)
+1. Run the following command to install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+2. Run the following command to install the DuckDB CLI: `curl https://install.duckdb.org | sh`
+3. A Stripe account with a test-mode secret key (`sk_test_...`)
 
 ## Setup
 
