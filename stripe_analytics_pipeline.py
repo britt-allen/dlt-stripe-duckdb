@@ -36,8 +36,5 @@ def load_data(
 
 
 if __name__ == "__main__":
-    # Scoped down from the default (all 9 endpoints) to just these two for
-    # this project's MVP + pagination check; incremental loading was dropped
-    # from scope, so load_incremental_endpoints() and its unused import were
-    # removed rather than left as dead code.
+    # Scoped down from the default (all 9 endpoints) to just 2 for MVP + pagination check
     load_data(endpoints=("Customer", "Charge",))

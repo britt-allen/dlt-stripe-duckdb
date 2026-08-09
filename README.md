@@ -1,5 +1,7 @@
 # dlt-stripe-duckdb
 
+AI was used in the creation of this pipeline and even this readme. I wrote about my learning project using Claude Plan Mode [here]() which inspired this repo. If you use this repo and run into issues and feel so compelled to submit a PR you are welcome to. This is not meant to be perfect, be kind.
+
 Loads fake `Customer` and `Charge` data from Stripe into DuckDB, using dlt's `stripe_analytics` verified source.
 
 ## Prerequisites
@@ -11,7 +13,7 @@ Loads fake `Customer` and `Charge` data from Stripe into DuckDB, using dlt's `st
 
 1. Install dependencies into `.venv`, per `uv.lock`
 
-```
+```bash
 uv sync
 ```
 
@@ -35,7 +37,7 @@ Creates 100 fake customers, each with one charge, directly via Stripe's API.
 
 1. Run
 
-```
+```bash
 uv run python stripe_analytics_pipeline.py
 ```
 
@@ -45,20 +47,20 @@ Loads `Customer` and `Charge` into `stripe_analytics.duckdb`, schema `stripe_upd
 
 1. Run
 
-```
+```bash
 duckdb -ui stripe_analytics.duckdb
 ```
 
 2. List all tables
 
-```SQL
+```
 SHOW ALL TABLES;
 ```
 
 3. Query the `customer` table
 
 ```SQL
-SELECT * FROM stripe_analytics.stripe_updated.customer
+SELECT * FROM stripe_updated.customer
 ```
 
 ## Notes

@@ -7,7 +7,7 @@ import stripe
 from dlt.sources import DltResource
 from pendulum import DateTime
 
-from .helpers import pagination, transform_date
+from .helpers import pagination
 from .settings import ENDPOINTS, INCREMENTAL_ENDPOINTS
 
 
@@ -53,57 +53,4 @@ def stripe_source(
             stripe_resource,
             name=endpoint,
             write_disposition="replace",
-        )(endpoint)
-
-
-@dlt.source
-def incremental_stripe_source(
-    endpoints: Tuple[str, ...] = INCREMENTAL_ENDPOINTS,
-    stripe_secret_key: str = dlt.secrets.value,
-    initial_start_date: Optional[DateTime] = None,
-    end_date: Optional[DateTime] = None,
-) -> Iterable[DltResource]:
-    """
-    As Stripe API does not include the "updated" key in its responses,
-    we are only able to perform incremental downloads from endpoints where all objects are uneditable.
-    This source yields the resources with incremental loading based on "append" mode.
-    You will load only the newest data without duplicating and without downloading a huge amount of data each time.
-
-    Args:
-        endpoints (tuple): A tuple of endpoint names to retrieve data from. Defaults to Stripe API endpoints with uneditable data.
-        stripe_secret_key (str): The API access token for authentication. Defaults to the value in the `dlt.secrets` object.
-        initial_start_date (Optional[DateTime]): An optional parameter that specifies the initial value for dlt.sources.incremental.
-                            If parameter is not None, then load only data that were created after initial_start_date on the first run.
-                            Defaults to None. Format: datetime(YYYY, MM, DD).
-        end_date (Optional[DateTime]): An optional end date to limit the data retrieved.
-                  Defaults to None. Format: datetime(YYYY, MM, DD).
-    Returns:
-        Iterable[DltResource]: Resources with only that data has not yet been loaded.
-    """
-    stripe.api_key = stripe_secret_key
-    # Bumped from the scaffolded default "2022-11-15" (deprecated, warned on
-    # every run) to the current version+track string from Stripe's changelog.
-    # Note the ".dahlia" release-track suffix is part of the version string,
-    # not a stray artifact - a first attempt at this fix dropped it and broke
-    # every request with "Invalid Stripe API version".
-    stripe.api_version = "2026-07-29.dahlia"
-    start_date_unix = (
-        transform_date(initial_start_date) if initial_start_date is not None else -1
-    )
-
-    def incremental_resource(
-        endpoint: str,
-        created: Optional[Any] = dlt.sources.incremental(
-            "created", initial_value=start_date_unix
-        ),
-    ) -> Generator[Dict[Any, Any], Any, None]:
-        start_value = created.last_value
-        yield from pagination(endpoint, start_date=start_value, end_date=end_date)
-
-    for endpoint in endpoints:
-        yield dlt.resource(
-            incremental_resource,
-            name=endpoint,
-            write_disposition="append",
-            primary_key="id",
         )(endpoint)

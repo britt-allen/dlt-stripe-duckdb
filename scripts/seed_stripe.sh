@@ -5,11 +5,10 @@ set -euo pipefail
 # (no Stripe CLI/dashboard steps needed - just a secret key).
 : "${STRIPE_SECRET_KEY:?Set STRIPE_SECRET_KEY to your sk_test_... key first}"
 
-# Range 16-115: this is the *second* seeding pass (a first pass created
-# fake1-fake15). Deliberately pushed past 100 records so dlt's pagination
-# (has_more/starting_after) actually gets exercised across multiple pages,
-# instead of everything fitting in one API response.
-for i in $(seq 16 115); do
+# Range 1-115: creates (fake1-fake115). Deliberately pushed past 100 records
+# so dlt's pagination (has_more/starting_after) actually gets exercised across
+#multiple pages, instead of everything fitting in one API response.
+for i in $(seq 1 115); do
   # The card (source=tok_visa) must be attached at customer-creation time,
   # not passed on the /charges call below - passing `customer` + `source`
   # together on a charge tells Stripe "attach this card to that customer,"
