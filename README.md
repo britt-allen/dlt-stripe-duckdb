@@ -84,7 +84,3 @@ SELECT * FROM stripe_analytics.stripe_updated.customer
 | `stripe_analytics/README.md` | `dlt init` verified-source's own generic docs, untouched | Must pre-exist |
 | `stripe_analytics/settings.py` | `dlt init` verified-source code, untouched (`ENDPOINTS` constants) | Must pre-exist |
 | `uv.lock` | `uv` auto-generated lockfile | Auto-created by `uv sync` if missing (committing it pins exact versions) |
-
-Excluded here (gitignored or not sensible to commit): `.dlt/secrets.toml` (secret, must be created manually — gitignored, so a fresh clone has none), `stripe_analytics.duckdb` (auto-created by running the pipeline), `stripe_analytics/__pycache__/` (auto-created bytecode cache), `.claude/` (local tool state, unrelated to the project).
-
-Also note: this repo's setup steps never call `dlt init` — the scaffolded source files are already committed. Don't rerun `dlt init stripe_analytics duckdb` on a clone; without `.dlt/.sources` intact from a prior init, it can't detect that `stripe_analytics_pipeline.py` and `stripe_analytics/__init__.py` were edited, and may overwrite those edits.
