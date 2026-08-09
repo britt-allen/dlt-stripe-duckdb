@@ -4,9 +4,10 @@ AI was used in the creation of this pipeline and even this readme. I wrote about
 
 Loads fake `Customer` and `Charge` data from Stripe into DuckDB, using dlt's `stripe_analytics` verified source.
 
-## Prerequisites
+## Prerequisites (Linux and macOS)
 
-- [uv](https://docs.astral.sh/uv/)
+- Run the following command to install uv: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Run the following command to install the DuckDB CLI: `curl https://install.duckdb.org | sh`
 - A Stripe account with a test-mode secret key (`sk_test_...`)
 
 ## Setup
