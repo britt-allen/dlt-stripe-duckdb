@@ -1,6 +1,6 @@
 # dlt-stripe-duckdb
 
-AI was used in the creation of this pipeline and even this readme. I wrote about my learning project using Claude Plan Mode [here]() which inspired this repo. If you use this repo and run into issues and feel so compelled to submit a PR you are welcome to. This is not meant to be perfect, be kind.
+AI was used in the creation of this pipeline and even this readme. I wrote about my learning project using Claude Plan Mode [here](https://medium.com/@britt-allen/learning-dlt-stripe-and-duckdb-with-claude-plan-mode-a921c5ba9036?sharedUserId=britt-allen) which inspired this repo. If you use this repo and run into issues and feel so compelled to submit a PR you are welcome to. This is not meant to be perfect, be kind.
 
 Loads fake `Customer` and `Charge` data from Stripe into DuckDB, using dlt's `stripe_analytics` verified source.
 
